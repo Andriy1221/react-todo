@@ -1,6 +1,5 @@
-.App {
-  background-color: rgb(235, 235, 235);
-  height: 100vh;
+html body {
+  background-color: rgb(241, 241, 241);
 }
 
 .container {
@@ -29,4 +28,10 @@
 
 .toogle-text {
   color: rgb(148, 148, 148);
+}
+
+.position-toast {
+  position: absolute;
+  top: 15px;
+  right: 15px;
 }

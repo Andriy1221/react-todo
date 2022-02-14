@@ -12,11 +12,13 @@ function AddTodo(props) {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
+        <div className="input-group mt-5 mb-3">
           <input
             type="text"
-            className="form-control mb-3 mt-5"
-            placeholder="New Todo"
+            className="form-control"
+            placeholder="Add a new task"
+            aria-label="Username"
+            aria-describedby="basic-addon1"
             value={input || ""}
             onChange={(e) => setInput(e.target.value)}
           />

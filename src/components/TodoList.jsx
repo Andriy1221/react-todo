@@ -10,7 +10,7 @@ const TodoList = (props) => {
           className={
             todo.checked
               ? "list-group-item d-flex justify-content-between list-group-item-success"
-              : "list-group-item d-flex justify-content-between"
+              : "list-group-item d-flex justify-content-between list-group-item-light"
           }
           key={todo.id}
         >
