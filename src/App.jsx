@@ -37,7 +37,7 @@ function App() {
   };
 
   const handleDelete = (todo) => {
-    const updatedTodos = todos.filter((item) => item.id != todo.id);
+    const updatedTodos = todos.filter((item) => item.id !== todo.id);
     setTodos(updatedTodos);
   };
 
