@@ -1,14 +1,10 @@
 import "./App.css";
-import AddTodo from "./components/AddTodo";
 import { useState } from "react";
+import AddTodo from "./components/AddTodo";
+import TodoList from "./components/TodoList";
+import CompletedTodos from "./components/CompletedTodos";
 import { v4 as uuid } from "uuid";
-import {
-  FaRegTimesCircle,
-  FaRegCircle,
-  FaCheckCircle,
-  FaTrash,
-} from "react-icons/fa";
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { FaTrash } from "react-icons/fa";
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -49,44 +45,16 @@ function App() {
     setTodos(clearedTodos);
   };
 
+  const handleHideCompleted = () => {
+    setHideCompleted(!hideCompleted);
+  };
+
   return (
     <div className="App">
       <div className="container">
         <h1 className="pt-5 text-center">Let's get things done! 👨‍💻</h1>
         <AddTodo onSubmitTodo={handleSubmitTodo} />
-        <ul className="list-group mb-3">
-          {todos.map((todo) => (
-            <li
-              className={
-                todo.checked
-                  ? "list-group-item d-flex justify-content-between list-group-item-success"
-                  : "list-group-item d-flex justify-content-between"
-              }
-              key={todo.id}
-            >
-              <div onClick={() => handleCheck(todo)}>
-                {todo.checked ? (
-                  <FaCheckCircle className="todo-checked" size="20px" />
-                ) : (
-                  <FaRegCircle className="todo-unchecked" size="20px" />
-                )}
-                {todo.checked ? <del>{todo.value}</del> : todo.value}
-              </div>
-
-              <div>
-                {!todo.checked && (
-                  <span>
-                    <FaRegTimesCircle
-                      size="22px"
-                      className="delete-btn"
-                      onClick={() => handleDelete(todo)}
-                    />
-                  </span>
-                )}
-              </div>
-            </li>
-          ))}
-        </ul>
+        <TodoList todos={todos} onDelete={handleDelete} onCheck={handleCheck} />
         <div className="d-flex flex-row-reverse mb-2">
           <button
             type="button"
@@ -101,39 +69,12 @@ function App() {
         ) : (
           <p className="text-center">🎉 You're finished! Time for a break!</p>
         )}
-        <div className="text-center">
-          <hr class="mt-2 mb-5 mt-5" />
-
-          <span
-            className="toogle-text"
-            onClick={() => setHideCompleted(!hideCompleted)}
-          >
-            {hideCompleted ? (
-              <span>
-                Show completed tasks <IoIosArrowDown size="22px" />
-              </span>
-            ) : (
-              <span>
-                Hide completed tasks <IoIosArrowUp size="22px" />
-              </span>
-            )}
-          </span>
-          {!hideCompleted && (
-            <ul className="list-group mb-5 mt-3">
-              {checkedTodos.map((todo) => (
-                <li
-                  key={todo.id}
-                  className="list-group-item d-flex justify-content-between list-group-item-success"
-                >
-                  <div>
-                    <FaCheckCircle className="todo-checked" size="20px" />
-                    <del>{todo.value}</del>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
+        <hr class="mt-2 mb-5 mt-5" />
+        <CompletedTodos
+          checkedTodos={checkedTodos}
+          onHideCompleted={handleHideCompleted}
+          hideCompleted={hideCompleted}
+        />
       </div>
     </div>
   );
